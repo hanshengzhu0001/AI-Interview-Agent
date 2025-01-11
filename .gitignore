@@ -9,6 +9,10 @@ venv/
 *.pkl
 *.log
 
+# Ignore data
+*.json
+*.csv
+
 # Ignore Python bytecode
 __pycache__/
 *.pyc
