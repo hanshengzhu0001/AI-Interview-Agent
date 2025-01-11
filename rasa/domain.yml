@@ -1,0 +1,46 @@
+version: "3.1"
+
+intents:
+  - greet
+  - ask_company_profile
+  - ask_resume
+  - ask_behavioral_question
+  - ask_technical_question
+  - goodbye
+
+entities:
+  - job_position
+  - company_name
+  - skills
+  - experience
+  - behavioral_topic
+  - technical_topic
+
+responses:
+  utter_greet:
+    - text: "Hello! Welcome to your interview. How are you today?"
+  
+  utter_ask_company_profile:
+    - text: "Can you tell me more about the company and the position you are applying for?"
+  
+  utter_ask_resume:
+    - text: "Can you share some highlights from your resume, such as your skills and past experiences?"
+
+  utter_ask_behavioral_question:
+    - text: "Let’s talk about your experiences. Can you tell me about a time when you faced a challenge in a team? How did you handle it?"
+    - text: "Tell me about a situation where you had to lead a project. How did you manage the team and deliver the results?"
+    - text: "Can you describe a time when you had to deal with a difficult client or coworker? How did you manage that interaction?"
+
+  utter_ask_technical_question:
+    - text: "Let's move on to some technical questions. How would you approach troubleshooting an issue with a software application?"
+    - text: "In your previous role, did you work with [insert specific technology]? Can you describe your experience?"
+    - text: "Can you explain the process you would use to optimize a slow-performing database query?"
+
+  utter_goodbye:
+    - text: "Thank you for your time! Best of luck with the rest of your interview."
+  
+actions:
+  - action_ask_company_profile
+  - action_ask_resume
+  - action_ask_behavioral_question
+  - action_ask_technical_question

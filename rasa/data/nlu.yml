@@ -1,0 +1,53 @@
+version: "3.1"
+
+nlu:
+  # Greeting intent
+  - intent: greet
+    examples: |
+      - Hello
+      - Hi there!
+      - Hey
+      - Good morning
+      - Hi, how are you?
+
+  # Ask about company profile
+  - intent: ask_company_profile
+    examples: |
+      - Tell me about the company
+      - What does the company do?
+      - Can you describe the company's mission and values?
+      - What is the company culture like?
+      - What are the company’s goals?
+
+  # Ask about resume (General)
+  - intent: ask_resume
+    examples: |
+      - Tell me about your skills
+      - What are your strengths?
+      - Can you describe your previous job?
+
+  # Ask technical questions
+  - intent: ask_technical_question
+    examples: |
+      - Can you explain your experience with [technology]?
+      - How do you solve complex technical problems?
+      - Can you describe a time when you solved a difficult coding issue?
+      - What programming languages are you proficient in?
+      - What tools do you use for debugging?
+
+  # Ask behavioral questions
+  - intent: ask_behavioral_question
+    examples: |
+      - Tell me about a time you faced a challenge.
+      - How do you handle stress in the workplace?
+      - Describe a situation when you had to work in a team.
+      - Tell me about a time you showed leadership in a project.
+      - How do you prioritize tasks when working on multiple projects?
+
+  # Goodbye intent
+  - intent: goodbye
+    examples: |
+      - Goodbye
+      - Thanks, I’m done
+      - That’s all for now
+      - See you later

@@ -1,0 +1,64 @@
+version: "3.1"
+
+stories:
+  # Greet and ask company profile
+  - story: greet and ask company profile
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_company_profile
+      - action: utter_ask_company_profile
+
+  # Greet and ask technical question
+  - story: greet and ask technical question
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_technical_question
+      - action: utter_ask_technical_question
+
+  # Greet and ask behavioral question
+  - story: greet and ask behavioral question
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_behavioral_question
+      - action: utter_ask_behavioral_question
+
+  # Ask resume information after greeting
+  - story: ask resume information after greeting
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_resume
+      - action: utter_ask_resume
+
+  # Ask resume information after company profile
+  - story: ask resume after company profile
+    steps:
+      - intent: ask_company_profile
+      - action: utter_ask_company_profile
+      - intent: ask_resume
+      - action: utter_ask_resume
+
+  # Ask behavioral question after company profile
+  - story: ask behavioral question after company profile
+    steps:
+      - intent: ask_company_profile
+      - action: utter_ask_company_profile
+      - intent: ask_behavioral_question
+      - action: utter_ask_behavioral_question
+
+  # Ask technical question after company profile
+  - story: ask technical question after company profile
+    steps:
+      - intent: ask_company_profile
+      - action: utter_ask_company_profile
+      - intent: ask_technical_question
+      - action: utter_ask_technical_question
+
+  # Ending the conversation with goodbye
+  - story: end conversation
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
