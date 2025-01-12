@@ -46,3 +46,6 @@ build/
 
 # Ignore any user-specific config files
 *.swp
+
+# Ignore node_modules directory
+node_modules/

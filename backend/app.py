@@ -1,4 +1,7 @@
+import asyncio
+import torch
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS to allow cross-origin requests from frontend
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSequenceClassification
 from rasa.core.agent import Agent
 from rasa.core.utils import EndpointConfig
@@ -9,92 +12,72 @@ import os
 # Initialize Flask app
 app = Flask(__name__)
 
-# Load FLAN-T5 model and tokenizer for question generation
-flan_t5_model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-small")
-flan_t5_tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-small")
+# Enable CORS to allow cross-origin requests from frontend
+CORS(app)
 
-# Load DistilBERT model for intent recognition
+# Load FLAN-T5 model and tokenizer for question generation
+flan_t5_model = AutoModelForSeq2SeqLM.from_pretrained("/Users/hanszhu/Desktop/AI_Interview_Agent/rasa/models/flan_t5_interview_agent")
+flan_t5_tokenizer = AutoTokenizer.from_pretrained("/Users/hanszhu/Desktop/AI_Interview_Agent/rasa/models/flan_t5_interview_agent")
+
+# Load DistilBERT model and tokenizer for intent recognition
 distilbert_model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased")
 distilbert_tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 
-# Initialize Rasa agent (replace with your Rasa model path)
-rasa_agent = Agent.load('rasa/models/your_rasa_model')
+# Load Rasa Agent for dialog management
+rasa_model_path = "/Users/hanszhu/Desktop/AI_Interview_Agent/rasa/models/20250111-165506-solid-crescendo.tar.gz"
+endpoint_config = EndpointConfig(url="http://0.0.0.0:5055/webhooks/rest/webhook")
+agent = Agent.load(rasa_model_path)
 
-# Define a function to generate personalized questions based on the resume and job posting using FLAN-T5
-def generate_personalized_questions(resume_text, job_posting_text):
-    input_text = f"Resume: {resume_text} \nJob Posting: {job_posting_text} \nGenerate 3 personalized interview questions."
-    
-    inputs = flan_t5_tokenizer.encode(input_text, return_tensors="pt", truncation=True, padding=True, max_length=512)
-    outputs = flan_t5_model.generate(inputs, max_length=150, num_beams=5, early_stopping=True)
-    
-    question = flan_t5_tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return question
-
-# Define a function to classify the intent of the candidate's response using DistilBERT
-def classify_intent(response_text):
-    inputs = distilbert_tokenizer(response_text, return_tensors="pt", padding=True, truncation=True, max_length=512)
+# classify intent
+def classify_intent(user_message: str):
+    inputs = distilbert_tokenizer(user_message, return_tensors="pt", padding=True, truncation=True)
     outputs = distilbert_model(**inputs)
-    prediction = outputs.logits.argmax().item()  # Take the class with the highest score
-    return prediction  # This will return an integer corresponding to the predicted intent
+    logits = outputs.logits
+    intent = logits.argmax(dim=1).item()
 
-# Rasa interaction API: send a message to the Rasa agent and receive a response
-@app.route("/interact", methods=["POST"])
-def interact_with_rasa():
-    user_message = request.json.get("message")
-    response = rasa_agent.handle_text(user_message)  # Send text to Rasa agent
-    return jsonify({"response": response})
+    print("Logits:", logits)
+    
+    # Return intent label (add your own logic for mapping logits to intent labels)
+    intent_labels = ['greet', 'ask_company_profile', 'ask_resume', 'ask_technical_question', 'ask_behavioral_question', 'goodbye']
+    print(f"Classified Intent: {intent_labels[intent]}")
 
-# API to generate personalized interview questions
-@app.route("/generate_question", methods=["POST"])
-def generate_question():
-    # Receive the job posting and candidate's resume from the request
+    return intent_labels[intent]
+
+# Route to handle messages from frontend
+@app.route('/rasa', methods=['POST'])
+async def rasa():
     data = request.get_json()
-    resume_text = data.get('resume')
-    job_posting_text = data.get('job_posting')
+    user_message = data.get('message')
 
-    # Generate questions based on the resume and job posting
-    generated_question = generate_personalized_questions(resume_text, job_posting_text)
+    # Step 1: Classify the intent using DistilBERT
+    intent = classify_intent(user_message)
 
-    # Return the generated question
-    return jsonify({"question": generated_question})
+    # Step 2: Based on intent, either generate a question or call Rasa
+    if intent == 'ask_technical_question' or intent == 'ask_behavioral_question':
+        # Generate interview question using FLAN-T5
+        inputs = flan_t5_tokenizer(f"Generate a {intent} for an interview.", return_tensors="pt")
+        output = flan_t5_model.generate(inputs.input_ids)
+        question = flan_t5_tokenizer.decode(output[0], skip_special_tokens=True)
+        return jsonify({"response": question})
 
-# API to handle speech recognition (if needed for voice input)
-@app.route("/transcribe_speech", methods=["POST"])
-def transcribe_speech():
-    # Initialize recognizer
-    recognizer = sr.Recognizer()
+    elif intent == 'greet':
+        return jsonify({"response": "Hello! How can I help you today?"})
+    elif intent == 'ask_company_profile':
+        return jsonify({"response": "Our company is a leading innovator in AI technologies..."})
+    elif intent == 'ask_resume':
+        return jsonify({"response": "Can you tell me more about your experience with data science?"})
+    elif intent == 'goodbye':
+        return jsonify({"response": "Goodbye! Have a great day!"})
 
-    # Get audio file from request
-    audio_file = request.files['audio']
-
-    # Use speech recognition to transcribe the audio to text
-    with sr.AudioFile(audio_file) as source:
-        audio = recognizer.record(source)
-
+    # Step 3: If the intent is not recognized, pass it to Rasa for dialog management
     try:
-        # Recognize speech using Google Speech Recognition
-        text = recognizer.recognize_google(audio)
-        return jsonify({"transcription": text})
-    except sr.UnknownValueError:
-        return jsonify({"error": "Speech recognition could not understand the audio"})
-    except sr.RequestError:
-        return jsonify({"error": "Could not request results from Google Speech Recognition"})
+        responses = await agent.handle_text(user_message)
+        if responses:
+            return jsonify({"response": responses[0]["text"]})
+        else:
+            return jsonify({"response": "Sorry, I didn't understand that."})
+    except Exception as e:
+        return jsonify({"response": f"Error: {str(e)}"})
 
-# API to convert text to speech (if you need the AI to speak)
-@app.route("/text_to_speech", methods=["POST"])
-def text_to_speech():
-    # Receive text from the request
-    data = request.get_json()
-    text = data.get('text')
-
-    # Convert the text to speech using gTTS
-    tts = gTTS(text, lang='en')
-    audio_path = "output_audio.mp3"
-    tts.save(audio_path)
-
-    # Send the audio file back as a response
-    return jsonify({"audio_file": audio_path})
-
-# Run Flask app
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
