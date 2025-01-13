@@ -43,6 +43,9 @@ Dockerfile
 *.egg-info/
 dist/
 build/
+data/
+rasa/models/
+models/
 
 # Ignore any user-specific config files
 *.swp
