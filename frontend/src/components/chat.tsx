@@ -9,21 +9,28 @@ const Chat: React.FC = () => {
 
   // Handle text input
   const handleTextInput = async () => {
-    if (!question) return
+    if (!question.trim()) return // Prevent sending empty messages
 
     // Add user message to the chat
-    const newMessage = { q: question, a: "" }
-    setMessages(prevMessages => [...prevMessages, newMessage])
+    const userMessage = { q: question, a: "" }
+    setMessages(prevMessages => [...prevMessages, userMessage])
 
     try {
       // Send user message to the Flask backend
       const response = await axios.post("http://127.0.0.1:5000/rasa", { message: question })
+      console.log("Backend response:", response.data) // Log response for debugging
+
       if (response.data && response.data.response) {
         const botResponse = { q: "", a: response.data.response }
-        setMessages(prevMessages => [...prevMessages, newMessage, botResponse])
+        setMessages(prevMessages => [...prevMessages, botResponse]) // Only add botResponse
+      } else {
+        const errorMessage = { q: "", a: "No response from server." }
+        setMessages(prevMessages => [...prevMessages, errorMessage])
       }
     } catch (error) {
       console.error("Error:", error)
+      const errorMessage = { q: "", a: "There was an error processing your request." }
+      setMessages(prevMessages => [...prevMessages, errorMessage])
     }
 
     setQuestion("")
