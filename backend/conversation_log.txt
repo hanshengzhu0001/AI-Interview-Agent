@@ -1,0 +1,28 @@
+Intent: ask_company_profile
+User Input: generate 3 technical interview questions
+AI Response: Our company is a leading innovator in AI technologies...
+
+Intent: ask_technical_question
+User Input: generate 3 behavioral interview quesitons based on the info
+AI Response: Why should we hire you over other candidates? What makes you best for the role? How do you stay current with trends, new technologies, and techniques in data science? Describe an experience in which you had moving deadlines for several projects, but
+
+Intent: greet
+User Input: hello
+AI Response: Error: 'coroutine' object is not subscriptable
+
+Intent: greet
+User Input: hello
+AI Response: Hello! Welcome to your interview. How are you today?
+
+Intent: ask_company_profile
+User Input: ask me 3 technical interview questions
+AI Response: In your previous role, did you work with [insert specific technology]? Can you describe your experience?
+
+Intent: ask_company_profile
+User Input: provide me 3 technical interview questions in data science
+AI Response: Sorry, I didn't understand that.
+
+Intent: ask_technical_question
+User Input: generate 3 behavioral interview quesitons based on the info
+AI Response: Why should we hire you over other candidates? What makes you best for the role? How do you stay current with trends, new technologies, and techniques in data science? Describe an experience in which you had moving deadlines for several projects, but
+

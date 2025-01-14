@@ -4,6 +4,7 @@ from flask_cors import CORS  # Import CORS to allow cross-origin requests from f
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSequenceClassification
 from rasa.core.agent import Agent
 from rasa.core.utils import EndpointConfig
+import asyncio
 import os
 from concurrent.futures import ThreadPoolExecutor  # For handling blocking tasks
 
@@ -47,68 +48,48 @@ def classify_intent(user_message: str):
     
     return intent_labels[intent_idx]
 
+def log_conversation(intent, user_message, response):
+    with open("conversation_log.txt", "a") as file:
+        file.write(f"Intent: {intent}\n")
+        file.write(f"User Input: {user_message}\n")
+        file.write(f"AI Response: {response}\n\n")
+
 # Function to handle the request logic
 def handle_request(user_message, intent):
     global latest_job_posting
+    response = ""
 
     if intent == 'save_job_posting':
-        # Save the job posting content to a file
         latest_job_posting = user_message
         with open("job_posting.txt", "w") as file:
             file.write(latest_job_posting)
-        return {"response": "Job posting saved successfully!"}
+        response = "Job posting saved successfully!"
 
     elif intent in ['ask_technical_question', 'ask_behavioral_question']:
-        # Generate interview question using FLAN-T5
         job_posting = ""
         if os.path.exists("job_posting.txt"):
             with open("job_posting.txt", 'r') as file:
                 job_posting = file.read().strip()
 
-        if intent == 'ask_technical_question':
-            if job_posting:
-                prompt = f"Generate a technical interview question related to the following job posting: {job_posting}"
-            else:
-                prompt = "Generate a technical interview question related to machine learning."
-        elif intent == 'ask_behavioral_question':
-            if job_posting:
-                prompt = f"Generate a behavioral interview question related to the following job posting: {job_posting}"
-            else:
-                prompt = "Generate a behavioral interview question related to machine learning."
-
+        prompt = f"Generate a {intent.split('_')[1]} interview question related to the job posting saved: {job_posting}" \
+            if job_posting else f"Generate a {intent.split('_')[1]} interview question."
         inputs = flan_t5_tokenizer(prompt, return_tensors="pt")
         output = flan_t5_model.generate(
-            inputs.input_ids,
-            max_new_tokens=50,          # Adjust this value as needed
-            num_beams=5,                # For better quality responses
-            no_repeat_ngram_size=2,     # Prevent repetition
-            early_stopping=True
+            inputs.input_ids, max_new_tokens=50, num_beams=5, no_repeat_ngram_size=2, early_stopping=True
         )
-        question = flan_t5_tokenizer.decode(output[0], skip_special_tokens=True)
-
-        print(f"Generated Question: {question}")
-
-        return {"response": question}
-
-    elif intent == 'greet':
-        return {"response": "Hello! How can I help you today?"}
-    elif intent == 'ask_company_profile':
-        return {"response": "Our company is a leading innovator in AI technologies..."}
-    elif intent == 'ask_resume':
-        return {"response": "Can you tell me more about your experience with data science?"}
-    elif intent == 'goodbye':
-        return {"response": "Goodbye! Have a great day!"}
+        response = flan_t5_tokenizer.decode(output[0], skip_special_tokens=True)
 
     else:
-        # Pass it to Rasa for dialog management
+        # Pass all other intents (greet, ask_company_profile, ask_resume, goodbye) to Rasa for dynamic responses
         try:
-            responses = agent.handle_text(user_message)
-            if responses:
-                return {"response": responses[0]["text"]}
-            else:
-                return {"response": "Sorry, I didn't understand that."}
+            rasa_responses = asyncio.run(agent.handle_text(user_message))
+            response = rasa_responses[0]["text"] if rasa_responses else "Sorry, I didn't understand that."
         except Exception as e:
-            return {"response": f"Error: {str(e)}"}
+            response = f"Error: {str(e)}"
+
+    # Log the conversation
+    log_conversation(intent, user_message, response)
+    return {"response": response}
 
 # Route to handle messages from frontend
 @app.route('/rasa', methods=['POST'])
