@@ -26,3 +26,131 @@ Intent: ask_technical_question
 User Input: generate 3 behavioral interview quesitons based on the info
 AI Response: Why should we hire you over other candidates? What makes you best for the role? How do you stay current with trends, new technologies, and techniques in data science? Describe an experience in which you had moving deadlines for several projects, but
 
+Intent: greet
+User Input: hello
+AI Response: Hello! Welcome to your interview. How are you today?
+
+Intent: greet
+User Input: hello
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Can you tell me more about the company and the position you are applying for?
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Can you tell me more about the company and the position you are applying for?
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello how are you doing
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello
+AI Response: Hello! Welcome to your interview. How are you today?
+
+Intent: greet
+User Input: hello how are you
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Can you tell me more about the company and the position you are applying for?
+
+Intent: greet
+User Input: hello
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Sorry, I didn't understand that.
+
+Intent: ask_resume
+User Input: give me 3 interview questions on the job posting
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Can you tell me more about the company and the position you are applying for?
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hi
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello
+AI Response: Hello! Welcome to your interview. How are you today?
+
+Intent: ask_resume
+User Input: give me 3 interview questions on any job posting
+AI Response: Tell me about a situation where you had to lead a project. How did you manage the team and deliver the results?
+
+Intent: greet
+User Input: hello how are you doing
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello
+AI Response: Hello! Welcome to your interview. How are you today?
+
+Intent: ask_resume
+User Input: give me 3 interview questions on any job posting
+AI Response: Tell me about a situation where you had to lead a project. How did you manage the team and deliver the results?
+
+Intent: ask_resume
+User Input: give me 3 interview questions on any job posting
+AI Response: Sorry, I didn't understand that.
+
+Intent: ask_resume
+User Input: give me 3 interview questions on any job posting
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello
+AI Response: Hello! Welcome to your interview. How are you today?
+
+Intent: ask_resume
+User Input: give me 3 interview questions on any job posting
+AI Response: Tell me about a situation where you had to lead a project. How did you manage the team and deliver the results?
+
+Intent: greet
+User Input: hello
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello
+AI Response: Hello! How can I help you today?
+
+Intent: ask_resume
+User Input: give me 3 interview quesitons on any job posting
+AI Response: Can you tell me more about your experience with data science?
+

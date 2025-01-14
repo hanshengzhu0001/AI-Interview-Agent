@@ -1,120 +1,141 @@
-import React, { useState } from 'react'
-import { Input, Button, Box, VStack, Text, IconButton, Flex, HStack } from '@chakra-ui/react'
-import axios from 'axios'
-import { FaMicrophone } from 'react-icons/fa'
+import React, { useState } from 'react';
+import { Input, Button, Box, VStack, Text, IconButton, Flex, HStack } from '@chakra-ui/react';
+import axios from 'axios';
+import { FaMicrophone, FaPlay } from 'react-icons/fa';
 
 const Chat: React.FC = () => {
-  const [question, setQuestion] = useState<string>("")
-  const [messages, setMessages] = useState<{ q: string, a: string }[]>([])
+  const [question, setQuestion] = useState<string>('');
+  const [messages, setMessages] = useState<{ q: string; a: string; audio?: string }[]>([]);
+  const [recording, setRecording] = useState<boolean>(false);
 
-  // Handle text input
   const handleTextInput = async () => {
-    if (!question.trim()) return // Prevent sending empty messages
-
-    // Add user message to the chat
-    const userMessage = { q: question, a: "" }
-    setMessages(prevMessages => [...prevMessages, userMessage])
+    if (!question.trim()) return;
+    const userMessage = { q: question, a: '' };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
 
     try {
-      // Send user message to the Flask backend
-      const response = await axios.post("http://127.0.0.1:5000/rasa", { message: question })
-      console.log("Backend response:", response.data) // Log response for debugging
-
-      if (response.data && response.data.response) {
-        const botResponse = { q: "", a: response.data.response }
-        setMessages(prevMessages => [...prevMessages, botResponse]) // Only add botResponse
-      } else {
-        const errorMessage = { q: "", a: "No response from server." }
-        setMessages(prevMessages => [...prevMessages, errorMessage])
-      }
+      const response = await axios.post(
+        'http://127.0.0.1:5000/rasa',
+        { message: question },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+      const { response: botResponse, audio_path } = response.data;
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { q: '', a: botResponse, audio: audio_path },
+      ]);
     } catch (error) {
-      console.error("Error:", error)
-      const errorMessage = { q: "", a: "There was an error processing your request." }
-      setMessages(prevMessages => [...prevMessages, errorMessage])
+      console.error('Error processing text input:', error);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { q: '', a: 'Error occurred while processing your input.' },
+      ]);
     }
+    setQuestion('');
+  };
 
-    setQuestion("")
-  }
+  const handleVoiceInput = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream);
+      const chunks: Blob[] = [];
 
-  // Handle voice input
-  const handleVoiceInput = () => {
-    if (!("SpeechRecognition" in window || "webkitSpeechRecognition" in window)) {
-      alert("Speech Recognition is not supported in this browser.")
-      return
+      recorder.ondataavailable = (e) => chunks.push(e.data);
+
+      recorder.onstop = async () => {
+        const blob = new Blob(chunks, { type: 'audio/wav' });
+        const formData = new FormData();
+        formData.append('voice', blob);
+
+        try {
+          const response = await axios.post('http://127.0.0.1:5000/rasa', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
+          const { response: botResponse, audio_path, transcription } = response.data;
+
+          const userMessage = transcription
+            ? { q: transcription, a: '' }
+            : { q: 'Voice Input', a: 'Sorry, I could not understand the audio.' };
+
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            userMessage,
+            { q: '', a: botResponse || 'Error occurred while processing your input.', audio: audio_path },
+          ]);
+        } catch (error) {
+          console.error('Error during voice processing:', error);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { q: 'Voice Input', a: 'Error occurred while processing your input.' },
+          ]);
+        }
+      };
+
+      recorder.start();
+      setRecording(true);
+      setTimeout(() => {
+        recorder.stop();
+        setRecording(false);
+      }, 5000);
+    } catch (error) {
+      console.error('Error accessing the microphone:', error);
+      alert('Unable to access the microphone. Please check your browser settings.');
     }
+  };
 
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)()
-    recognition.lang = "en-US"
-    recognition.interimResults = false
-    recognition.maxAlternatives = 1
+  const handlePlayAudio = async (audioPath: string) => {
+    if (!audioPath) return;
 
-    recognition.onstart = () => {
-      console.log("Voice recognition started.")
-    }
-
-    recognition.onresult = (event: any) => {
-      const speechToText = event.results[0][0].transcript
-      setQuestion(speechToText)
-      handleTextInput() // Automatically trigger text input handling after speech input
-    }
-
-    recognition.onerror = (event: any) => {
-      console.error("Speech recognition error", event)
-    }
-
-    recognition.onend = () => {
-      console.log("Voice recognition ended.")
-    }
-
-    recognition.start()
-  }
+    const audio = new Audio(`http://127.0.0.1:5000${audioPath}`);
+    audio.play();
+  };
 
   return (
     <Box maxWidth="500px" mx="auto" p="4" border="1px" borderColor="gray.300" borderRadius="md">
       <VStack spacing="4" align="stretch">
-        {/* Chat display */}
         <Box maxHeight="400px" overflowY="auto" border="1px" borderColor="gray.200" p="4" borderRadius="md">
           {messages.map((message, index) => (
-            <Flex
-              key={index}
-              direction={message.q ? "row-reverse" : "row"}
-              align="center"
-              justify="flex-start"
-              mb="3"
-            >
+            <Flex key={index} direction={message.q ? 'row-reverse' : 'row'} align="center" mb="3">
               <Box
                 p="2"
                 borderRadius="md"
-                bg={message.q ? "blue.500" : "green.500"}
+                bg={message.q ? 'blue.500' : 'green.500'}
                 color="white"
                 maxWidth="70%"
               >
                 <Text>{message.q || message.a}</Text>
               </Box>
+              {message.audio && (
+                <IconButton
+                  aria-label="Play audio"
+                  icon={<FaPlay />}
+                  onClick={() => handlePlayAudio(message.audio!)}
+                  colorScheme="teal"
+                  ml="2"
+                />
+              )}
             </Flex>
           ))}
         </Box>
-
-        {/* Text input */}
-        <HStack spacing="4" align="center">
+        <HStack spacing="4">
           <Input
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Ask a question"
-            size="md"
-            width="80%"
           />
-          <Button onClick={handleTextInput} colorScheme="blue">Send</Button>
+          <Button onClick={handleTextInput} colorScheme="blue">
+            Send
+          </Button>
           <IconButton
-            aria-label="Start voice input"
+            aria-label="Voice input"
             icon={<FaMicrophone />}
             onClick={handleVoiceInput}
-            colorScheme="green"
+            colorScheme={recording ? 'red' : 'green'}
           />
         </HStack>
       </VStack>
     </Box>
-  )
-}
+  );
+};
 
-export default Chat
+export default Chat;
