@@ -80,7 +80,7 @@ def transcribe_voice(file_path):
             transcription = recognizer.recognize_google(audio_data)
         return transcription, temp_wav
     except sr.UnknownValueError:
-        return "", None  # Return an empty string instead of an error message
+        return None, None  # Return an empty string instead of an error message
     except Exception as e:
         return f"Error processing audio: {e}", None
 

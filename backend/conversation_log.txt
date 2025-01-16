@@ -143,3 +143,63 @@ User: hello
 AI: Hello! Welcome to your interview. How are you today?
 Intent: greet
 
+2025-01-16T15:37:33.541629
+User: let's move on to the next question
+AI: How have you used data to elevate the experience of a customer?
+Intent: next_question
+
+2025-01-16T15:37:46.246425
+User: hello
+AI: Sorry, I couldn't understand that.
+Intent: greet
+
+2025-01-16T15:37:51.063023
+User: hello
+AI: Sorry, I couldn't understand that.
+Intent: greet
+
+2025-01-16T15:38:17.194142
+User: hello
+AI: Sorry, I couldn't understand that.
+Intent: greet
+
+2025-01-16T18:16:26.568530
+User: hi please move on to the next question
+AI: What did you do in your last job?
+Intent: next_question
+
+2025-01-16T18:16:40.563920
+User: hello
+AI: Hello! Welcome to your interview. How are you today?
+Intent: greet
+
+2025-01-16T18:17:14.892075
+User: please move on to the next question
+AI: Explain the difference between the train, validation, and test set. What does the distribution look like for the average time spent watching YouTube per day?
+Intent: next_question
+
+2025-01-16T18:17:43.306876
+User: please move on to the next question
+AI: Please explain the p-value to someone non-technical.?
+Intent: next_question
+
+2025-01-16T18:20:44.631978
+User: look at this job for me: About Us  Resistbot Action Fund is the non-profit behind the Resistbot chatbot which helps ordinary citizens engage with their elected officials. We are seeking a motivated and talented Computer Science Intern to join our team and contribute to exciting projects in data collection, processing, and analysis.  Key Responsibilities  Develop and maintain Python-based scripts and applications. Utilize and extend web scraping tools and libraries such as Beautiful Soup, Scrapy, or Selenium to extract data from various websites. Clean, transform, and organize raw data into structured formats. Collaborate with team members to design, implement, and improve data workflows. Document processes, code, and workflows for future reference. Qualifications  Currently pursuing a degree in Computer Science, Data Science, or a related field. Proficiency in Python programming. Familiarity with or ability to learn web scraping libraries such as Beautiful Soup, Scrapy, or Selenium. Strong problem-solving skills and attention to detail. Basic understanding of HTML and CSS. Highly motivated and ready to work quickly in a small, fast-paced startup environment. Nice to Have  Experience with version control systems like Git and Github. Knowledge of APIs and data formats such as JSON and XML. Familiarity with AWS. Understanding of Javascript and Typescript. What We Offer  Work from anywhere! We are a remote-first team and our office is on Discord. Hands-on experience with real-world projects. Mentorship and guidance from our three engineers and product designer with decades of combined experience. Opportunities to enhance technical and problem-solving skills. A collaborative and supportive work environment. A project for your programming portfolio. How to Apply  Submit your resume, project examples, or GitHub links. Applications will be reviewed on a rolling basis. We are excited to help you grow your skills and experience in computer science. Join us in tackling meaningful challenges and making a real impact!
+AI: Job posting saved successfully!
+Intent: save_job_posting
+
+2025-01-16T18:29:28.893107
+User: hello
+AI: Sorry, I couldn't understand that.
+Intent: greet
+
+2025-01-16T18:29:38.466003
+User: hello
+AI: Sorry, I couldn't understand that.
+Intent: greet
+
+2025-01-16T18:30:28.880050
+User: hello
+AI: Sorry, I couldn't understand that.
+Intent: greet
+

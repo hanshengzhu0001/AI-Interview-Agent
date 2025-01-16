@@ -46,6 +46,7 @@ build/
 data/
 rasa/models/
 models/
+uploads/
 
 # Ignore any user-specific config files
 *.swp

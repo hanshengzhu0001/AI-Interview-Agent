@@ -28,7 +28,6 @@ const Chat: React.FC = () => {
         { q: '', a: botResponse, audio: audio_path },
       ]);
     } catch (error) {
-      console.error('Error processing text input:', error);
       setMessages((prevMessages) => [
         ...prevMessages,
         { q: '', a: 'Error occurred while processing your input.' },
@@ -42,39 +41,39 @@ const Chat: React.FC = () => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const recorder = new MediaRecorder(stream);
       const chunks: Blob[] = [];
-
+  
       recorder.ondataavailable = (e) => chunks.push(e.data);
-
+  
       recorder.onstop = async () => {
-        const blob = new Blob(chunks, { type: 'audio/wav' });
+        const blob = new Blob(chunks, { type: "audio/wav" });
         const formData = new FormData();
-        formData.append('voice', blob);
-
+        formData.append("voice", blob);
+  
         try {
-          const response = await axios.post('http://127.0.0.1:5000/rasa', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
+          const response = await axios.post("http://127.0.0.1:5000/rasa", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
           });
-
+  
           const { response: botResponse, audio_path, transcription } = response.data;
-
-          const userMessage = transcription
-            ? { q: transcription, a: '' }
-            : { q: 'Voice Input', a: 'Sorry, I could not understand the audio.' };
-
-          setMessages((prevMessages) => [
-            ...prevMessages,
-            userMessage,
-            { q: '', a: botResponse || 'Error occurred while processing your input.', audio: audio_path },
-          ]);
+  
+          if (transcription) {
+            setMessages((prevMessages) => [
+              ...prevMessages,
+              { q: transcription, a: "" }, // User's voice transcription
+              { q: "", a: botResponse || "Error processing your input.", audio: audio_path },
+            ]);
+          } else {
+            // **Fix: No "Voice Input" placeholder when transcription fails**
+            console.warn("Audio not recognized.");
+          }
         } catch (error) {
-          console.error('Error during voice processing:', error);
+          console.error("Error during voice processing:", error);
           setMessages((prevMessages) => [
             ...prevMessages,
-            { q: 'Voice Input', a: 'Error occurred while processing your input.' },
           ]);
         }
       };
-
+  
       recorder.start();
       setRecording(true);
       setTimeout(() => {
@@ -82,10 +81,10 @@ const Chat: React.FC = () => {
         setRecording(false);
       }, 5000);
     } catch (error) {
-      console.error('Error accessing the microphone:', error);
-      alert('Unable to access the microphone. Please check your browser settings.');
+      console.error("Error accessing the microphone:", error);
+      alert("Unable to access the microphone. Please check your browser settings.");
     }
-  };
+  };  
 
   const handlePlayAudio = async (audioPath: string) => {
     if (!audioPath) return;
