@@ -23,36 +23,43 @@ cd AI-Interview-Agent
 
 **Install dependencies**  
 Make sure you have Python 3.8+ installed. Then, install the required packages:
+```
 
 ```bash
 cd backend
 pip install -r requirements.txt
+```
 
 ```markdown
 Start the Flask Server
+```
 
 ```bash
 python app.py
+```
 
 ```markdown
 ### 3. Set Up the Frontend
 
 Make sure you have Node.js and npm installed.
+```
 
 ```bash
 cd frontend
 npm install
 npm start
-
+```
 
 ```markdown
 ### 4. Start the Rasa Model
 
 Ensure Rasa is installed and properly trained. To start the Rasa chatbot:
+```
 
 ```bash
 cd rasa
 rasa run
+```
 
 ```markdown
 Method | Endpoint | Description
@@ -73,6 +80,4 @@ The AI will evaluate responses and seamlessly transition to the next question.
 
 **Text or Voice Interaction**  
 Users can either type responses or submit audio messages.
-
-
-
+```
