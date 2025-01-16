@@ -203,3 +203,78 @@ User: hello
 AI: Sorry, I couldn't understand that.
 Intent: greet
 
+2025-01-16T18:50:39.832483
+User: hello
+AI: Hello! Welcome to your interview. How are you today?
+Intent: greet
+
+2025-01-16T20:23:01.779310
+User: hello
+AI: Hello! Welcome to your interview. How are you today?
+Intent: greet
+
+2025-01-16T20:23:17.253508
+User: hello let's get into the interview
+AI: Can you tell me more about the company and the position you are applying for?
+Intent: greet
+
+2025-01-16T20:24:04.039742
+User: save this job posting for me:About Us  Resistbot Action Fund is the non-profit behind the Resistbot chatbot which helps ordinary citizens engage with their elected officials. We are seeking a motivated and talented Computer Science Intern to join our team and contribute to exciting projects in data collection, processing, and analysis.  Key Responsibilities  Develop and maintain Python-based scripts and applications. Utilize and extend web scraping tools and libraries such as Beautiful Soup, Scrapy, or Selenium to extract data from various websites. Clean, transform, and organize raw data into structured formats. Collaborate with team members to design, implement, and improve data workflows. Document processes, code, and workflows for future reference. Qualifications  Currently pursuing a degree in Computer Science, Data Science, or a related field. Proficiency in Python programming. Familiarity with or ability to learn web scraping libraries such as Beautiful Soup, Scrapy, or Selenium. Strong problem-solving skills and attention to detail. Basic understanding of HTML and CSS. Highly motivated and ready to work quickly in a small, fast-paced startup environment. Nice to Have  Experience with version control systems like Git and Github. Knowledge of APIs and data formats such as JSON and XML. Familiarity with AWS. Understanding of Javascript and Typescript. What We Offer  Work from anywhere! We are a remote-first team and our office is on Discord. Hands-on experience with real-world projects. Mentorship and guidance from our three engineers and product designer with decades of combined experience. Opportunities to enhance technical and problem-solving skills. A collaborative and supportive work environment. A project for your programming portfolio. How to Apply  Submit your resume, project examples, or GitHub links. Applications will be reviewed on a rolling basis. We are excited to help you grow your skills and experience in computer science. Join us in tackling meaningful challenges and making a real impact!
+AI: Job posting saved successfully!
+Intent: save_job_posting
+
+2025-01-16T20:24:44.736130
+User: give me a data science-related interview question on this job posting
+AI: Here is your first question: Why should we hire you over other candidates?
+Intent: get_behavioral
+
+2025-01-16T20:25:18.759673
+User: please move on to the next question
+AI: What makes you best for the role?
+Intent: next_question
+
+2025-01-16T20:25:31.018595
+User: please move on to the next question
+AI: How do you stay current with trends, new technologies, and techniques in data science?
+Intent: next_question
+
+2025-01-16T20:25:49.158399
+User: and finally we can do that again please move on to the next question
+AI: Describe an experience in which you had moving deadlines for several projects, but felt that one key project element needed extra attention. How did you balance your daily responsibilities with this new element?
+Intent: next_question
+
+2025-01-16T20:26:20.099406
+User: give me some technical interview questions, for instance on SQL
+AI: Here is your first question: How do you stay current with trends, new technologies, and techniques in data science?
+Intent: get_technical
+
+2025-01-16T20:26:29.709224
+User: next question
+AI: How would you communicate data-driven insights to a business stakeholder?
+Intent: next_question
+
+2025-01-16T20:26:35.357339
+User: next question
+AI: Describe an experience in which you had moving deadlines for several projects, but felt that one key project element needed extra attention. How did you balance your daily responsibilities with this new element?
+Intent: next_question
+
+2025-01-16T20:26:41.716780
+User: next question
+AI: Explain the difference between prediction and forecasting. Python or R: which one should you use on time series data set?
+Intent: next_question
+
+2025-01-16T20:26:47.049604
+User: next question
+AI: Is it k-fold or LOOCV?
+Intent: next_question
+
+2025-01-16T20:26:58.676486
+User: next question
+AI: Please explain the p-value to someone non-technical.?
+Intent: next_question
+
+2025-01-16T20:27:03.801692
+User: next question
+AI: No more questions left in the list.
+Intent: next_question
+
