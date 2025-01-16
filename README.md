@@ -14,54 +14,46 @@ An AI-powered interview assistant that dynamically generates and asks interview 
 
 ### 1. Clone the Repository
 
-```bash
+\```bash
 git clone https://github.com/hanshengzhu0001/AI-Interview-Agent.git
 cd AI-Interview-Agent
+\```
 
-```markdown
 ### 2. Set Up the Backend
 
 **Install dependencies**  
-Make sure you have Python 3.8+ installed. Then, install the required packages:
-```
+Make sure you have Python **3.8+** installed. Then, install the required packages:
 
-```bash
+\```bash
 cd backend
 pip install -r requirements.txt
-```
+\```
 
-```markdown
-Start the Flask Server
-```
+**Start the Flask Server**
 
-```bash
+\```bash
 python app.py
-```
+\```
 
-```markdown
 ### 3. Set Up the Frontend
 
-Make sure you have Node.js and npm installed.
-```
+Make sure you have **Node.js** and **npm** installed.
 
-```bash
+\```bash
 cd frontend
 npm install
 npm start
-```
+\```
 
-```markdown
 ### 4. Start the Rasa Model
 
-Ensure Rasa is installed and properly trained. To start the Rasa chatbot:
-```
+Ensure **Rasa** is installed and properly trained. To start the Rasa chatbot:
 
-```bash
+\```bash
 cd rasa
 rasa run
-```
+\```
 
-```markdown
 Method | Endpoint | Description
 ------ | -------- | -----------
 POST | /rasa | Sends user input (text/audio) and receives AI-generated response.
@@ -69,6 +61,7 @@ GET | /audio/<filename> | Retrieves the generated audio response.
 GET | /conversation-history | Fetches the full conversation history.
 
 ## Usage
+
 **Provide a Job Description**  
 Send a job description to save relevant context for interview questions.
 
@@ -80,4 +73,3 @@ The AI will evaluate responses and seamlessly transition to the next question.
 
 **Text or Voice Interaction**  
 Users can either type responses or submit audio messages.
-```
