@@ -14,45 +14,45 @@ An AI-powered interview assistant that dynamically generates and asks interview 
 
 ### 1. Clone the Repository
 
-\```bash
+```bash
 git clone https://github.com/hanshengzhu0001/AI-Interview-Agent.git
 cd AI-Interview-Agent
-\```
+```
 
 ### 2. Set Up the Backend
 
 **Install dependencies**  
 Make sure you have Python **3.8+** installed. Then, install the required packages:
 
-\```bash
+```bash
 cd backend
 pip install -r requirements.txt
-\```
+```
 
 **Start the Flask Server**
 
-\```bash
+```bash
 python app.py
-\```
+```
 
 ### 3. Set Up the Frontend
 
 Make sure you have **Node.js** and **npm** installed.
 
-\```bash
+```bash
 cd frontend
 npm install
 npm start
-\```
+```
 
 ### 4. Start the Rasa Model
 
 Ensure **Rasa** is installed and properly trained. To start the Rasa chatbot:
 
-\```bash
+```bash
 cd rasa
 rasa run
-\```
+```
 
 Method | Endpoint | Description
 ------ | -------- | -----------
