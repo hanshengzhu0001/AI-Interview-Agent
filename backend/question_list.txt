@@ -1,0 +1,4 @@
+How have you used data to elevate the experience of a customer?
+What did you do in your last job?
+Explain the difference between the train, validation, and test set. What does the distribution look like for the average time spent watching YouTube per day?
+Please explain the p-value to someone non-technical.?

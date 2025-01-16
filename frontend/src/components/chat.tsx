@@ -10,6 +10,7 @@ const Chat: React.FC = () => {
 
   const handleTextInput = async () => {
     if (!question.trim()) return;
+
     const userMessage = { q: question, a: '' };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
 
@@ -19,7 +20,9 @@ const Chat: React.FC = () => {
         { message: question },
         { headers: { 'Content-Type': 'application/json' } }
       );
+
       const { response: botResponse, audio_path } = response.data;
+
       setMessages((prevMessages) => [
         ...prevMessages,
         { q: '', a: botResponse, audio: audio_path },
@@ -51,6 +54,7 @@ const Chat: React.FC = () => {
           const response = await axios.post('http://127.0.0.1:5000/rasa', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
+
           const { response: botResponse, audio_path, transcription } = response.data;
 
           const userMessage = transcription
@@ -90,12 +94,31 @@ const Chat: React.FC = () => {
     audio.play();
   };
 
+  const handleMessageClick = (audioPath?: string) => {
+    if (audioPath) handlePlayAudio(audioPath);
+  };
+
   return (
     <Box maxWidth="500px" mx="auto" p="4" border="1px" borderColor="gray.300" borderRadius="md">
       <VStack spacing="4" align="stretch">
-        <Box maxHeight="400px" overflowY="auto" border="1px" borderColor="gray.200" p="4" borderRadius="md">
+        {/* Message Display */}
+        <Box
+          maxHeight="400px"
+          overflowY="auto"
+          border="1px"
+          borderColor="gray.200"
+          p="4"
+          borderRadius="md"
+        >
           {messages.map((message, index) => (
-            <Flex key={index} direction={message.q ? 'row-reverse' : 'row'} align="center" mb="3">
+            <Flex
+              key={index}
+              direction={message.q ? 'row-reverse' : 'row'}
+              align="center"
+              mb="3"
+              onClick={() => handleMessageClick(message.audio)}
+              cursor={message.audio ? 'pointer' : 'default'}
+            >
               <Box
                 p="2"
                 borderRadius="md"
@@ -109,7 +132,10 @@ const Chat: React.FC = () => {
                 <IconButton
                   aria-label="Play audio"
                   icon={<FaPlay />}
-                  onClick={() => handlePlayAudio(message.audio!)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent triggering the click on parent
+                    handlePlayAudio(message.audio!);
+                  }}
                   colorScheme="teal"
                   ml="2"
                 />
@@ -117,6 +143,8 @@ const Chat: React.FC = () => {
             </Flex>
           ))}
         </Box>
+
+        {/* Input and Actions */}
         <HStack spacing="4">
           <Input
             value={question}

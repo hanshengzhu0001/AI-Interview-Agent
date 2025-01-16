@@ -1,156 +1,145 @@
-Intent: ask_company_profile
-User Input: generate 3 technical interview questions
-AI Response: Our company is a leading innovator in AI technologies...
 
+Intent: greet
+User Input: hello
+AI Response: Hello! Welcome to your interview. How are you today?
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Can you tell me more about the company and the position you are applying for?
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: Sorry, I could not understand the audio.
+AI Response: Sorry, I didn't understand that.
+
+Intent: greet
+User Input: hello
+AI Response: Sorry, I didn't understand that.
+
+2025-01-16T13:06:49.034469
+User: give me some interview questions
+AI: Can you tell me more about the company and the position you are applying for?
+Intent: ask_resume
+
+2025-01-16T13:11:09.371341
+User: give me 2 technical interview questions
+AI: Let's move on to some technical questions. How would you approach troubleshooting an issue with a software application?
+Intent: ask_resume
+
+2025-01-16T13:19:53.307331
+User: give me the next interview question
+AI: Can you tell me more about the company and the position you are applying for?
+Intent: ask_resume
+
+2025-01-16T13:20:00.265093
+User: give me 2 technical interview questions
+AI: Let's move on to some technical questions. How would you approach troubleshooting an issue with a software application?
+Intent: ask_resume
+
+2025-01-16T13:30:19.357703
+User: give me 2 technical interview questions
+AI: Sorry, I couldn't understand that.
+Intent: ask_resume
+
+2025-01-16T13:31:01.239987
+User: generate me 2 technical questions for my interview
+AI: Sorry, I couldn't understand that.
+Intent: ask_resume
+
+2025-01-16T13:31:25.637749
+User: hello
+AI: Hello! Welcome to your interview. How are you today?
+Intent: greet
+
+2025-01-16T13:32:25.778971
+User: "What programming languages are important for this position?"
+AI: Generated 1 questions.
 Intent: ask_technical_question
-User Input: generate 3 behavioral interview quesitons based on the info
-AI Response: Why should we hire you over other candidates? What makes you best for the role? How do you stay current with trends, new technologies, and techniques in data science? Describe an experience in which you had moving deadlines for several projects, but
 
+2025-01-16T14:08:21.228854
+User: hello
+AI: Hello! Welcome to your interview. How are you today?
 Intent: greet
-User Input: hello
-AI Response: Error: 'coroutine' object is not subscriptable
 
-Intent: greet
-User Input: hello
-AI Response: Hello! Welcome to your interview. How are you today?
-
-Intent: ask_company_profile
-User Input: ask me 3 technical interview questions
-AI Response: In your previous role, did you work with [insert specific technology]? Can you describe your experience?
-
-Intent: ask_company_profile
-User Input: provide me 3 technical interview questions in data science
-AI Response: Sorry, I didn't understand that.
-
-Intent: ask_technical_question
-User Input: generate 3 behavioral interview quesitons based on the info
-AI Response: Why should we hire you over other candidates? What makes you best for the role? How do you stay current with trends, new technologies, and techniques in data science? Describe an experience in which you had moving deadlines for several projects, but
-
-Intent: greet
-User Input: hello
-AI Response: Hello! Welcome to your interview. How are you today?
-
-Intent: greet
-User Input: hello
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Can you tell me more about the company and the position you are applying for?
-
-Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Can you tell me more about the company and the position you are applying for?
-
-Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: hello how are you doing
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: hello
-AI Response: Hello! Welcome to your interview. How are you today?
-
-Intent: greet
-User Input: hello how are you
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Can you tell me more about the company and the position you are applying for?
-
-Intent: greet
-User Input: hello
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Sorry, I didn't understand that.
-
+2025-01-16T14:08:30.542148
+User: give me 2 technical interview questions
+AI: In your previous role, did you work with [insert specific technology]? Can you describe your experience?
 Intent: ask_resume
-User Input: give me 3 interview questions on the job posting
-AI Response: Sorry, I didn't understand that.
 
+2025-01-16T14:10:14.046812
+User: hello
+AI: Hello! Welcome to your interview. How are you today?
 Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Can you tell me more about the company and the position you are applying for?
 
+2025-01-16T14:10:27.112233
+User: give me 2 technical interview questions
+AI: Why should we hire you over other candidates? What makes you best for the role? How do you stay current with trends, new technologies, and techniques in data science? Describe an experience in which you had moving deadlines for several projects, but felt that one key project element needed extra attention. How did you balance your daily responsibilities with this new element? Explain machine learning to me like a 5-year-old. What is the difference between supervised and unsupervised learning? After studying the behavior of the population, you have identified four specific individual types valuable to your study. Which individual type would you prefer for text analytics?
+Intent: next_question
+
+2025-01-16T14:11:22.776644
+User: Give me a question about optimizing SQL queries for big data."
+AI: Generated 1 questions and saved them to question_list.txt.
+Intent: get_technical
+
+2025-01-16T14:17:05.640041
+User: Give me a question about optimizing SQL queries for big data."
+AI: Here is your first question: Why should we hire you over other candidates? What makes you best for the role? How do you stay current with trends, new technologies, and techniques in data science? Describe an experience in which you had moving deadlines for several projects, but felt that one key project element needed extra attention. How did you balance your daily responsibilities with this new element? Explain machine learning to me like a 5-year-old. What is the difference between supervised and unsupervised learning? After studying the behavior of the population, you have identified four specific individual types valuable to your study. Which individual type would you prefer for text analytics?
+Intent: get_technical
+
+2025-01-16T14:18:58.315387
+User: Give me a question about optimizing SQL queries for big data."
+AI: Here is your first question: Why should we hire you over other candidates? What makes you best for the role? How do you stay current with trends, new technologies, and techniques in data science? Describe an experience in which you had moving deadlines for several projects, but felt that one key project element needed extra attention. How did you balance your daily responsibilities with this new element? Explain machine learning to me like a 5-year-old. What is the difference between supervised and unsupervised learning? After studying the behavior of the population, you have identified four specific individual types valuable to your study. Which individual type would you prefer for text analytics?
+Intent: get_technical
+
+2025-01-16T14:30:39.673148
+User: give me 2 technical interview quesitons about data science
+AI: Here is your first question: Why should we hire you over other candidates?
+Intent: get_technical
+
+2025-01-16T14:30:50.358578
+User: move on to next question
+AI: Why should we hire you over other candidates?
+Intent: next_question
+
+2025-01-16T14:31:16.534948
+User: move on to next question
+AI: What makes you best for the role?
+Intent: next_question
+
+2025-01-16T14:37:12.700730
+User: give me 2 interview questions on data science
+AI: Job posting saved successfully!
+Intent: save_job_posting
+
+2025-01-16T14:37:26.060625
+User: give me technical interview questions on data science
+AI: Here is your first question: No more questions left in the list.
+Intent: get_technical
+
+2025-01-16T14:38:41.441091
+User: give me technical interview questions on data science
+AI: Here is your first question: What data science tools are you most comfortable with?
+Intent: get_technical
+
+2025-01-16T14:40:52.872821
+User: hello
+AI: Hello! Welcome to your interview. How are you today?
 Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Sorry, I didn't understand that.
 
+2025-01-16T14:40:53.805684
+User: Sorry, I could not understand the audio.
+AI: Can you tell me more about the company and the position you are applying for?
 Intent: greet
-User Input: hello
-AI Response: Sorry, I didn't understand that.
 
+2025-01-16T14:49:27.161674
+User: hello
+AI: Hello! Welcome to your interview. How are you today?
 Intent: greet
-User Input: hi
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: hello
-AI Response: Hello! Welcome to your interview. How are you today?
-
-Intent: ask_resume
-User Input: give me 3 interview questions on any job posting
-AI Response: Tell me about a situation where you had to lead a project. How did you manage the team and deliver the results?
-
-Intent: greet
-User Input: hello how are you doing
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: Sorry, I could not understand the audio.
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: hello
-AI Response: Hello! Welcome to your interview. How are you today?
-
-Intent: ask_resume
-User Input: give me 3 interview questions on any job posting
-AI Response: Tell me about a situation where you had to lead a project. How did you manage the team and deliver the results?
-
-Intent: ask_resume
-User Input: give me 3 interview questions on any job posting
-AI Response: Sorry, I didn't understand that.
-
-Intent: ask_resume
-User Input: give me 3 interview questions on any job posting
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: hello
-AI Response: Hello! Welcome to your interview. How are you today?
-
-Intent: ask_resume
-User Input: give me 3 interview questions on any job posting
-AI Response: Tell me about a situation where you had to lead a project. How did you manage the team and deliver the results?
-
-Intent: greet
-User Input: hello
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: hello
-AI Response: Sorry, I didn't understand that.
-
-Intent: greet
-User Input: hello
-AI Response: Hello! How can I help you today?
-
-Intent: ask_resume
-User Input: give me 3 interview quesitons on any job posting
-AI Response: Can you tell me more about your experience with data science?
 
